@@ -19,7 +19,11 @@ requirements:
         parser.add_argument("-g", "--goldstandard", required=True, help="Goldstandard for scoring")
 
         args = parser.parse_args()
-        score = 1 + 1
+
+        submission = [float(ele) for ele in open(args.submissionfile, "r").readlines()[1].split(',')]
+        goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
+
+        score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
 
         result = {'auc': score,

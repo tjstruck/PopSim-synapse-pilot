@@ -13,6 +13,7 @@ requirements:
         #!/usr/bin/env python
         import argparse
         import json
+        import math
         parser = argparse.ArgumentParser()
         parser.add_argument("-r", "--results", required=True, help="validation results")
         parser.add_argument("-e", "--entity_type", required=True, help="synapse entity type downloaded")
@@ -28,9 +29,25 @@ requirements:
                 message = sub_file.read()
             invalid_reasons = []
             prediction_file_status = "VALIDATED"
-            if not message.startswith("test"):
-                invalid_reasons.append("Submission must have test column")
-                prediction_file_status = "INVALID"
+            # Look through the contents of prediction file to ensure it is formated correctly
+            for i, col in enumerate(','.join(message.split()).split(",")):
+                if i == 0 and col != "ll":
+                    invalid_reasons.append("Submission must have the first column as ll")
+                    prediction_file_status = "INVALID"
+                if i == 1 and col != "theta":
+                    invalid_reasons.append("Submission must have the second column as theta")
+                    prediction_file_status = "INVALID"
+                if i > 1 and col != "theta":
+                    try:
+                        if math.isnan(float(col)):
+                            invalid_reasons.append("Submission must have no NaNs as a value")
+                            prediction_file_status = "INVALID"
+                    except ValueError:
+                        invalid_reasons.append("Submission must have integer or float as a value")
+                        prediction_file_status = "INVALID"
+        #
+        ### The keys are considered annotations
+        #
         result = {'submission_errors': "\n".join(invalid_reasons),
                   'submission_status': prediction_file_status}
         with open(args.results, 'w') as o:

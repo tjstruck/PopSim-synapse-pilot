@@ -60,7 +60,7 @@ steps:
     in:
       # TODO: replace `valueFrom` with the Synapse ID to the challenge goldstandard
       - id: synapseid
-        valueFrom: "syn18081597"
+        valueFrom: "syn51759949"
       - id: synapse_config
         source: "#synapseConfig"
     out:
@@ -91,7 +91,7 @@ steps:
         source: "#validate/invalid_reasons"
       # OPTIONAL: set `default` to `false` if email notification about valid submission is needed
       - id: errors_only
-        default: true
+        default: false
     out: [finished]
 
   annotate_validation_with_output:
