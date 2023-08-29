@@ -27,26 +27,5 @@ RUN conda install conda-build
 RUN pip3 install numpy
 RUN conda install dill
 
-# Install latest version of WorkQueue
-RUN git clone https://github.com/cooperative-computing-lab/cctools cctools-source
-WORKDIR cctools-source
-RUN ./configure
-RUN make
-RUN make install
-WORKDIR ..
-RUN conda develop cctools/lib/python3.9/site-packages
-ENV PATH="/root/cctools/bin:${PATH}"
-
-# Install Dadi
-RUN git clone https://bitbucket.org/gutenkunstlab/dadi.git
-WORKDIR dadi
-RUN python3 setup.py develop
-RUN conda develop .
-WORKDIR ..
-
-# Install dadi-cli
-RUN git clone https://github.com/xin-huang/dadi-cli
-WORKDIR dadi-cli
-RUN python3 setup.py develop
-RUN conda develop .
-WORKDIR ..
+# Install demes
+RUN pip install demes
