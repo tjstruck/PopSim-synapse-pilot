@@ -13,8 +13,6 @@ requirements:
         #!/usr/bin/env python
         import argparse
         import json
-        open('~/ran_score','w')
-        import demes
         parser = argparse.ArgumentParser()
         parser.add_argument("-f", "--submissionfile", required=True, help="Submission File")
         parser.add_argument("-r", "--results", required=True, help="Scoring results")
@@ -25,6 +23,7 @@ requirements:
         submission = [float(ele) for ele in open(args.submissionfile, "r").readlines()[1].split(',')]
         goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
 
+        import demes
         score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
 
