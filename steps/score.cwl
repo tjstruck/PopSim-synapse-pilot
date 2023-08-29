@@ -23,7 +23,10 @@ requirements:
         submission = [float(ele) for ele in open(args.submissionfile, "r").readlines()[1].split(',')]
         goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
 
+        import os
+        os.system("pip install demes")
         import demes
+        
         score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
 
