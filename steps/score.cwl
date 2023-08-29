@@ -30,7 +30,8 @@ requirements:
         script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
         print(script_directory)
 
-        os.system("pip install demes")
+        import cwltool
+        print(cwltool.__file__)
         import demes
         
         score = submission[0] - goldstandard[0]
