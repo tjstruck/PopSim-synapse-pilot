@@ -13,6 +13,8 @@ requirements:
         #!/usr/bin/env python
         import argparse
         import json
+        import math
+        print(math.__file__)
         parser = argparse.ArgumentParser()
         parser.add_argument("-f", "--submissionfile", required=True, help="Submission File")
         parser.add_argument("-r", "--results", required=True, help="Scoring results")
@@ -24,6 +26,10 @@ requirements:
         goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
 
         import os
+        import sys
+        script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+        print(script_directory)
+
         os.system("pip install demes")
         import demes
         
