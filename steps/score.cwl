@@ -29,9 +29,6 @@ requirements:
         import sys
         script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
         print(script_directory)
-
-        import demes
-        print(demes.__file__)
         
         score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
@@ -73,4 +70,4 @@ arguments:
 
 hints:
   DockerRequirement:
-    dockerPull: tjstruck/popsim-pilot:1.1
+    dockerPull: tjstruck/popsim-pilot-slim:1.0
