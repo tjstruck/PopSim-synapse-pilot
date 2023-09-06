@@ -13,8 +13,6 @@ requirements:
         #!/usr/bin/env python
         import argparse
         import json
-        import math
-        print(math.__file__)
         parser = argparse.ArgumentParser()
         parser.add_argument("-f", "--submissionfile", required=True, help="Submission File")
         parser.add_argument("-r", "--results", required=True, help="Scoring results")
@@ -25,11 +23,6 @@ requirements:
         submission = [float(ele) for ele in open(args.submissionfile, "r").readlines()[1].split(',')]
         goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
 
-        import os
-        import sys
-        script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-        print(script_directory)
-        
         score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
 
@@ -70,4 +63,4 @@ arguments:
 
 hints:
   DockerRequirement:
-    dockerPull: tjstruck/popsim-pilot-slim:1.0
+    dockerPull: tjstruck/popsim-pilot-slim
