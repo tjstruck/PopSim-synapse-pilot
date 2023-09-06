@@ -30,9 +30,8 @@ requirements:
         script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
         print(script_directory)
 
-        import cwltool
-        print(cwltool.__file__)
         import demes
+        print(demes.__file__)
         
         score = submission[0] - goldstandard[0]
         prediction_file_status = "SCORED"
