@@ -27,40 +27,9 @@ requirements:
         else:
             invalid_reasons = []
             prediction_file_status = "VALIDATED"
-            try:
-                demes.load(args.submission_file)
-            except KeyError:
-                invalid_reasons = ["File could not be loaded by demes due to missing information."]
-                prediction_file_status = "INVALID"
-            except:
-                invalid_reasons = ["File could not be loaded by demes, possibly due to not being a YAML format."]
-                prediction_file_status = "INVALID"
-        fi = '\n'.join(open(args.submission_file,"r").readlines())
+            demes.load(args.submission_file)
 
-        if 'epochs:' in fi:
-            pass
-        else:
-            invalid_reasons.append("Missing: 'epochs' information")
-            prediction_file_status = "INVALID"
-
-        if 'demes:' in fi:
-            pass
-        else:
-            invalid_reasons.append("Missing: 'demes' information")
-            prediction_file_status = "INVALID"
-
-        if '- start_size:' in fi:
-            pass
-        else:
-            invalid_reasons.append("Missing: 'start_size' information")
-            prediction_file_status = "INVALID"
-
-        if 'end_time:' in fi:
-            pass
-        else:
-            invalid_reasons.append("Missing: 'end_time' information")
-            prediction_file_status = "INVALID"
-
+        #
         ### The keys are considered annotations
         #
         result = {'submission_errors': "\n".join(invalid_reasons),
