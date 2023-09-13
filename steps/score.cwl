@@ -20,10 +20,15 @@ requirements:
 
         args = parser.parse_args()
 
-        submission = [float(ele) for ele in open(args.submissionfile, "r").readlines()[1].split(',')]
-        goldstandard = [float(ele) for ele in open(args.goldstandard, "r").readlines()[1].split(',')]
+        import demes
 
-        score = submission[0] - goldstandard[0]
+        submission = demes.load(args.submissionfile)
+        goldstandard = demes.load(args.goldstandard)
+
+        sub_time = submission.demes[0].epochs[1].time_span
+        gold_time = goldstandard.demes[0].epochs[1].time_span
+
+        score = -1.0 * abs(gold_time - sub_time)
         prediction_file_status = "SCORED"
 
         result = {'auc': score,
