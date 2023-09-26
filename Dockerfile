@@ -7,7 +7,7 @@
 
 #FROM python:slim
 # Start with Synapse's DOCKER Image
-FROM sagebionetworks/synapse-workflow-orchestrator-toil
+FROM python:3.9.1-slim-buster
 
 # RUN apt-get update && apt-get -y upgrade \
 #   && apt-get install -y --no-install-recommends \
@@ -32,3 +32,4 @@ FROM sagebionetworks/synapse-workflow-orchestrator-toil
 
 # Install demes
 RUN pip3 install demes
+RUN pip3 install -U scikit-learn
