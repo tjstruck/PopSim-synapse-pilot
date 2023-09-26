@@ -33,10 +33,10 @@ requirements:
         # score = -1.0 * abs(gold_time - sub_time)
         MSE = mean_squared_error([gold_time], [sub_time])
         RMSE = math.sqrt(MSE)
-        score = -1.0 * abs(RMSE)
+        # score = -1.0 * abs(RMSE)
         prediction_file_status = "SCORED"
 
-        result = {'rmse': score,
+        result = {'rmse': RMSE,
                   'submission_status': prediction_file_status}
         with open(args.results, 'w') as o:
           o.write(json.dumps(result))
