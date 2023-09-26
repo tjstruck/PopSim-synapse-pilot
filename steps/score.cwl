@@ -21,6 +21,8 @@ requirements:
         args = parser.parse_args()
 
         import demes
+        from sklearn.metrics import mean_squared_error
+        import math
 
         submission = demes.load(args.submissionfile)
         goldstandard = demes.load(args.goldstandard)
@@ -28,10 +30,13 @@ requirements:
         sub_time = submission.demes[0].epochs[1].time_span
         gold_time = goldstandard.demes[0].epochs[1].time_span
 
-        score = -1.0 * abs(gold_time - sub_time)
+        # score = -1.0 * abs(gold_time - sub_time)
+        MSE = mean_squared_error([gold_time], [sub_time])
+        RMSE = math.sqrt(MSE)
+        score = -1.0 * abs(RMSE)
         prediction_file_status = "SCORED"
 
-        result = {'auc': score,
+        result = {'rmse': score,
                   'submission_status': prediction_file_status}
         with open(args.results, 'w') as o:
           o.write(json.dumps(result))
@@ -68,4 +73,4 @@ arguments:
 
 hints:
   DockerRequirement:
-    dockerPull: tjstruck/popsim-pilot-slim:1.0
+    dockerPull: tjstruck/popsim-pilot-slim:1.1
